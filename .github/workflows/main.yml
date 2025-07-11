@@ -1,0 +1,20 @@
+name: AlioPlus Keyword Monitor
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # 한국 시간 매일 10시 (UTC+9 → UTC 1시)
+  workflow_dispatch:
+
+jobs:
+  check-keywords:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - name: Install dependencies
+        run: pip install beautifulsoup4 requests
+      - name: Run script
+        run: python main.py
